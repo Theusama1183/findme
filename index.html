@@ -17,9 +17,19 @@
   <body>
     <div id="location"></div>
     <div id="map"></div>
-
-    <input type="text" id="latitude" placeholder="Latitude" />
-    <input type="text" id="longitude" placeholder="Longitude" />
+    <form name="contact" netlify>
+      <p>
+        <label>Name <input type="text" name="name" /></label>
+      </p>
+      <p>
+        <label>Email <input type="email" name="email" /></label>
+      </p>
+      <input type="hidden" id="latitude" placeholder="Latitude" />
+      <input type="hidden" id="longitude" placeholder="Longitude" />
+      <p>
+        <button type="submit">Send</button>
+      </p>
+    </form>
 
     <script>
       function showUserLocation() {
