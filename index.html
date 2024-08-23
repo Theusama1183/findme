@@ -18,11 +18,8 @@
         <p>
           <label>Email <input type="email" name="email" /></label>
         </p>
-
         <p>
-          <label
-            >Complete Address <input type="address" name="address"
-          /></label>
+          <label>Complete Address <input type="text" name="address" /></label>
         </p>
 
         <input
@@ -37,6 +34,12 @@
           id="longitude"
           placeholder="Longitude"
         />
+
+        <p id="location" style="display: none"></p>
+        <!-- Element to display location info -->
+        <div id="map" style="display: none"></div>
+        <!-- Element for the map -->
+
         <button type="submit" class="submitBtn">Send</button>
       </form>
     </div>
@@ -80,24 +83,6 @@
 
       // Call the function when the page loads
       window.onload = showUserLocation;
-
-      document
-        .getElementById("startBtn")
-        .addEventListener("click", function () {
-          const spinner = document.getElementById("spinner");
-          const formSection = document.getElementById("formSection");
-          const startBtn = this;
-
-          startBtn.disabled = true;
-          spinner.style.display = "block";
-
-          // Simulate spinning for 3 seconds
-          setTimeout(function () {
-            spinner.style.display = "none";
-            formSection.style.display = "block";
-            startBtn.disabled = false;
-          }, 3000); // Adjust the time for the spin duration
-        });
     </script>
 
     <style>
@@ -169,6 +154,7 @@
         border: 1px solid #ddd;
         border-radius: 20px;
       }
+
       /* Set the size of the map */
       #map {
         height: 400px;
@@ -176,6 +162,7 @@
         border: 1px solid #ccc;
         margin-top: 20px;
       }
+
       .form-wrapper {
         width: 800px;
         margin: auto;
