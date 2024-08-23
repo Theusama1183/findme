@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show My Location on Map</title>
+    <style>
+      /* Set the size of the map */
+      #map {
+        height: 400px;
+        width: 100%;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="location"></div>
+    <div id="map"></div>
+
+    <input type="text" id="latitude" placeholder="Latitude" />
+    <input type="text" id="longitude" placeholder="Longitude" />
+
+    <script>
+      function showUserLocation() {
+        const locationElement = document.getElementById("location");
+        const latitudeInput = document.getElementById("latitude");
+        const longitudeInput = document.getElementById("longitude");
+        const mapElement = document.getElementById("map");
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              locationElement.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+              // Set latitude and longitude in input fields
+              latitudeInput.value = latitude;
+              longitudeInput.value = longitude;
+
+              // Embed the map with user's location
+              const mapUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
+              mapElement.innerHTML = `<iframe width="100%" height="100%" src="${mapUrl}" frameborder="0" allowfullscreen></iframe>`;
+            },
+            (error) => {
+              console.error("Geolocation error: ", error);
+              locationElement.textContent = "Unable to retrieve your location.";
+            },
+            {
+              enableHighAccuracy: true,
+              maximumAge: 0,
+              timeout: 5000,
+            }
+          );
+        } else {
+          locationElement.textContent =
+            "Geolocation is not supported by this browser.";
+        }
+      }
+
+      // Call the function when the page loads
+      window.onload = showUserLocation;
+    </script>
+  </body>
+</html>
